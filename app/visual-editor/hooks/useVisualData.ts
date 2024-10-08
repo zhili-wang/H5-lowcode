@@ -59,11 +59,15 @@ const defaultValue: VisualEditorModelValue = {
 }
 
 export function initVisualData() {
+  // ------- 改造start -------
+  const jsonData = usePageJson()
+
   // const localData = JSON.parse(sessionStorage.getItem(localKey) as string)
-  const localData = usePageJson()
-  const jsonData: VisualEditorModelValue = Object.keys(localData?.pages || {}).length
-    ? localData
-    : defaultValue
+  // const jsonData: VisualEditorModelValue = Object.keys(localData?.pages || {}).length
+  //   ? localData
+  //   : defaultValue
+
+  // ------- 改造end -------
 
   const route = useRoute()
   const router = useRouter()

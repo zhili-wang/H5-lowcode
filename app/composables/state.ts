@@ -1,6 +1,25 @@
+import { createNewPage } from '~/visual-editor/hooks/useVisualData'
 import type { VisualEditorModelValue } from '~/visual-editor/visual-editor.utils'
 
-export const usePageJson = () => useState<VisualEditorModelValue | undefined>('pageJson', () => undefined)
+const defaultValue: VisualEditorModelValue = {
+  pages: {
+    // 页面
+    '/': createNewPage({ title: '首页' }),
+  },
+  models: [], // 模型实体集合
+  actions: {
+    // 动作集合
+    fetch: {
+      name: '接口请求',
+      apis: [],
+    },
+    dialog: {
+      name: '对话框',
+      handlers: [],
+    },
+  },
+}
+export const usePageJson = () => useState<VisualEditorModelValue>('pageJson', () => defaultValue)
 
 // 需要进行持久化的数据：把需要持久化的数据放在下面这个对象中，才会持久化，不需要持久化的数据就不用放到这里了。
 const enduring: { [key: string]: () => Ref<any> } = {

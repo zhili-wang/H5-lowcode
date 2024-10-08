@@ -3,14 +3,12 @@ import { initVisualData, injectKey, localKey } from '@/visual-editor/hooks/useVi
 import { provide } from 'vue'
 import { appName } from '~/constants'
 
-const page = ref()
-
 const visualData = initVisualData()
+
 // 注入可视化编辑器所有配置
 provide(injectKey, visualData)
 
-const { jsonData } = visualData
-const pageJson = usePageJson()
+// const { jsonData } = visualData
 
 useHead({
   title: appName,
@@ -21,10 +19,10 @@ onMounted(() => {
   getLoacl()
   // 离开页面时保存数据，由于可能突发情况，所以重要数据请手动调用setLocal函数
   window.onbeforeunload = () => {
-    pageJson.value = jsonData
     // 如果需要调试本地存储数据，记得把这个注释一下
     setLocal()
   }
+
   // window.onbeforeunload = () => {
   //   sessionStorage.setItem(localKey, JSON.stringify(jsonData))
   // }
@@ -34,7 +32,7 @@ onMounted(() => {
 <template>
   <VitePwaManifest />
   <NuxtLayout>
-    <NuxtPage ref="page" />
+    <NuxtPage />
   </NuxtLayout>
 </template>
 

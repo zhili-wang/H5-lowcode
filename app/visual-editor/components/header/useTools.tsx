@@ -16,6 +16,7 @@ import JsonEditor from '~/visual-editor/components/common/JsonEditor/index.vue'
 // import { useQRCode } from '@vueuse/integrations/useQRCode'
 import { ElMessage, ElRadio, ElRadioGroup } from 'element-plus'
 import { reactive } from 'vue'
+import type { VisualEditorModelValue } from '~/visual-editor/visual-editor.utils'
 import 'element-plus/es/components/message/style/css'
 
 /**
@@ -162,7 +163,7 @@ export function useTools() {
       onClick: () => {
         // localStorage.setItem(localKey, JSON.stringify(jsonData))
         const pageJson = usePageJson()
-        pageJson.value = jsonData
+        pageJson.value = jsonData as VisualEditorModelValue
         // 离开页面前手动调用一次setLocal
         setLocal(localKey)
         window.open(location.href.replace('/#/', '/preview/#/'))

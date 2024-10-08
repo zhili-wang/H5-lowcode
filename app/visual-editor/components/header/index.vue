@@ -2,6 +2,7 @@
 import { localKey, useVisualData } from '@/visual-editor/hooks/useVisualData'
 import { BASE_URL } from '@/visual-editor/utils'
 import { VideoPlay } from '@element-plus/icons-vue'
+import type { VisualEditorModelValue } from '~/visual-editor/visual-editor.utils'
 import Preview from './preview.vue'
 import { useTools } from './useTools'
 
@@ -19,8 +20,9 @@ const pageJson = usePageJson()
 function runPreview() {
   // sessionStorage.setItem(localKey, JSON.stringify(jsonData))
   // localStorage.setItem(localKey, JSON.stringify(jsonData))
-  pageJson.value = jsonData
+  pageJson.value = jsonData as VisualEditorModelValue
   setLocal(localKey)
+
   isShowH5Preview.value = true
 }
 </script>
