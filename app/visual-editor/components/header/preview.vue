@@ -1,3 +1,23 @@
+<script lang="ts" setup>
+import { BASE_URL } from '@/visual-editor/utils'
+import { useVModel } from '@vueuse/core'
+
+defineOptions({
+  name: 'Preview',
+})
+
+const props = defineProps({
+  visible: {
+    type: Boolean,
+    default: false,
+  },
+})
+const emits = defineEmits(['update:visible'])
+
+const dialogVisible = useVModel(props, 'visible', emits)
+const previewUrl = `${BASE_URL}preview/${location.hash}`
+</script>
+
 <template>
   <el-dialog v-model="dialogVisible" custom-class="h5-preview" :show-close="false" width="360px">
     <iframe
@@ -6,29 +26,9 @@
       :src="previewUrl"
       frameborder="0"
       scrolling="auto"
-    ></iframe>
+    />
   </el-dialog>
 </template>
-
-<script lang="ts" setup>
-  import { useVModel } from '@vueuse/core';
-  import { BASE_URL } from '@/visual-editor/utils';
-
-  defineOptions({
-    name: 'Preview',
-  });
-
-  const props = defineProps({
-    visible: {
-      type: Boolean,
-      default: false,
-    },
-  });
-  const emits = defineEmits(['update:visible']);
-
-  const dialogVisible = useVModel(props, 'visible', emits);
-  const previewUrl = `${BASE_URL}preview/${location.hash}`;
-</script>
 
 <style lang="scss">
   .h5-preview {

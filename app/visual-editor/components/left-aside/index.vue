@@ -6,13 +6,36 @@
  * @Description: 左侧边栏
  * @FilePath: /vite-vue3-lowcode/src/visual-editor/components/left-aside/index.vue
 -->
+<script lang="ts" setup>
+/**
+ * @description 左侧边栏
+ */
+import { ref } from 'vue'
+import components from './components'
+
+defineOptions({
+  name: 'LeftAside',
+})
+
+const tabs = Object.entries(components)
+  .map(([name, component]) => {
+    const { label, icon, order } = component
+    return { label, icon, name, order, comp: component }
+  })
+  .sort((a, b) => a.order - b.order)
+
+const activeName = ref(tabs[0].name)
+</script>
+
 <template>
   <el-tabs v-model="activeName" tab-position="left" class="left-aside">
     <template v-for="tabItem in tabs" :key="tabItem.name">
       <el-tab-pane :name="tabItem.name" lazy>
         <template #label>
           <div class="tab-item">
-            <el-icon :size="26"><component :is="tabItem.icon" /></el-icon>
+            <el-icon :size="26">
+              <component :is="tabItem.icon" />
+            </el-icon>
             {{ tabItem.label }}
           </div>
         </template>
@@ -21,27 +44,6 @@
     </template>
   </el-tabs>
 </template>
-
-<script lang="ts" setup>
-  /**
-   * @description 左侧边栏
-   */
-  import { ref } from 'vue';
-  import components from './components';
-
-  defineOptions({
-    name: 'LeftAside',
-  });
-
-  const tabs = Object.entries(components)
-    .map(([name, component]) => {
-      const { label, icon, order } = component;
-      return { label, icon, name, order, comp: component };
-    })
-    .sort((a, b) => a.order - b.order);
-
-  const activeName = ref(tabs[0].name);
-</script>
 
 <style lang="scss" scoped>
   .left-aside {

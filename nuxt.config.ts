@@ -20,7 +20,7 @@ export default defineNuxtConfig({
 
   monacoEditor: {
     // These are default values:
-    locale: 'en',
+    locale: 'zh-cn',
     componentName: {
       codeEditor: 'MonacoEditor',
       diffEditor: 'MonacoDiffEditor',

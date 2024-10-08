@@ -1,19 +1,11 @@
-/*
- * @Author: 卜启缘
- * @Date: 2021-06-01 13:22:14
- * @LastEditTime: 2021-07-11 11:04:06
- * @LastEditors: 卜启缘
- * @Description:
- * @FilePath: \vite-vue3-lowcode\src\visual-editor\components\left-aside\components\container-component\index.tsx
- */
-import { defineComponent } from 'vue';
-import { cloneDeep } from 'lodash-es';
-import Draggable from 'vuedraggable';
-import { Suitcase } from '@element-plus/icons-vue';
-import styles from './index.module.scss';
-import type { VisualEditorComponent } from '@/visual-editor/visual-editor.utils';
-import { visualConfig } from '@/visual.config';
-import { createNewBlock } from '@/visual-editor/visual-editor.utils';
+import type { VisualEditorComponent } from '@/visual-editor/visual-editor.utils'
+import { visualConfig } from '@/visual.config'
+import { createNewBlock } from '@/visual-editor/visual-editor.utils'
+import { Suitcase } from '@element-plus/icons-vue'
+import { cloneDeep } from 'lodash-es'
+import { defineComponent } from 'vue'
+import Draggable from 'vuedraggable'
+import styles from './index.module.scss'
 
 export default defineComponent({
   name: 'ContainerComponent',
@@ -22,14 +14,14 @@ export default defineComponent({
   order: 4,
   setup() {
     const log = (evt) => {
-      window.console.log(evt);
-    };
+      window.console.log(evt)
+    }
     // 克隆组件
     const cloneDog = (comp) => {
-      console.log('当前拖拽的组件：', comp);
-      const newComp = cloneDeep(comp);
-      return createNewBlock(newComp);
-    };
+      console.log('当前拖拽的组件：', comp)
+      const newComp = cloneDeep(comp)
+      return createNewBlock(newComp)
+    }
 
     return () => (
       <>
@@ -52,6 +44,6 @@ export default defineComponent({
           }}
         </Draggable>
       </>
-    );
+    )
   },
-});
+})

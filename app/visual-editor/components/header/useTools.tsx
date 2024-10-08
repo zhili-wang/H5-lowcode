@@ -1,4 +1,3 @@
-import { JsonEditor } from '#build/components'
 import { useModal } from '@/visual-editor/hooks/useModal'
 import { localKey, useVisualData } from '@/visual-editor/hooks/useVisualData.js'
 import {
@@ -13,6 +12,7 @@ import {
   Upload,
 } from '@element-plus/icons-vue'
 import { useClipboard } from '@vueuse/core'
+import JsonEditor from '~/visual-editor/components/common/JsonEditor/index.vue'
 // import { useQRCode } from '@vueuse/integrations/useQRCode'
 import { ElMessage, ElRadio, ElRadioGroup } from 'element-plus'
 import { reactive } from 'vue'
@@ -160,7 +160,11 @@ export function useTools() {
       title: '预览',
       icon: Position,
       onClick: () => {
-        localStorage.setItem(localKey, JSON.stringify(jsonData))
+        // localStorage.setItem(localKey, JSON.stringify(jsonData))
+        const pageJson = usePageJson()
+        pageJson.value = jsonData
+        // 离开页面前手动调用一次setLocal
+        setLocal(localKey)
         window.open(location.href.replace('/#/', '/preview/#/'))
       },
     },

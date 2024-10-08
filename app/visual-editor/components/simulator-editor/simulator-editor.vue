@@ -1,6 +1,7 @@
 <script lang="tsx" setup>
 import type { VisualEditorBlockData } from '@/visual-editor/visual-editor.utils'
-import MonacoEditor from '@/visual-editor/components/common/monaco-editor/MonacoEditor'
+// import MonacoEditor from '@/visual-editor/components/common/monaco-editor/MonacoEditor'
+import JsonEditor from '@/visual-editor/components/common/JsonEditor/index.vue'
 import VerticalButtonGroup from '@/visual-editor/components/VerticalButtonGroup/index.vue'
 import { useModal } from '@/visual-editor/hooks/useModal'
 import { useVisualData } from '@/visual-editor/hooks/useVisualData'
@@ -152,7 +153,7 @@ function viewNodeInfo(block: VisualEditorBlockData) {
       center: true,
     },
     content: () => (
-      <MonacoEditor
+      <JsonEditor
         code={JSON.stringify(block)}
         layout={{ width: 530, height: 540 }}
         vid={block._vid}

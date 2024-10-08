@@ -10,17 +10,24 @@ const visualData = initVisualData()
 provide(injectKey, visualData)
 
 const { jsonData } = visualData
+const pageJson = usePageJson()
 
 useHead({
   title: appName,
 })
+
 // 挂载钩子，必须在onMounted的时候才能用local和window
 onMounted(() => {
+  getLoacl()
   // 离开页面时保存数据，由于可能突发情况，所以重要数据请手动调用setLocal函数
   window.onbeforeunload = () => {
+    pageJson.value = jsonData
     // 如果需要调试本地存储数据，记得把这个注释一下
-    sessionStorage.setItem(localKey, JSON.stringify(jsonData))
+    setLocal()
   }
+  // window.onbeforeunload = () => {
+  //   sessionStorage.setItem(localKey, JSON.stringify(jsonData))
+  // }
 })
 </script>
 
